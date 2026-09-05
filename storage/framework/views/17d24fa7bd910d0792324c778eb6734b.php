@@ -137,23 +137,25 @@
         <h1>Harapan Bangsa</h1>
         <p class="subtitle">Silakan masuk ke dashboard admin</p>
 
-        @if (session('success'))
+        <?php if(session('success')): ?>
             <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+                <?php echo e(session('success')); ?>
 
-        @if ($errors->any())
-            <div class="alert alert-error">
-                {{ $errors->first() }}
             </div>
-        @endif
+        <?php endif; ?>
+
+        <?php if($errors->any()): ?>
+            <div class="alert alert-error">
+                <?php echo e($errors->first()); ?>
+
+            </div>
+        <?php endif; ?>
 
         <form
-            action="{{ route('admin.login.process') }}"
+            action="<?php echo e(route('admin.login.process')); ?>"
             method="POST"
         >
-            @csrf
+            <?php echo csrf_field(); ?>
 
             <div class="form-group">
                 <label for="email">Alamat Email</label>
@@ -162,7 +164,7 @@
                     type="email"
                     id="email"
                     name="email"
-                    value="{{ old('email') }}"
+                    value="<?php echo e(old('email')); ?>"
                     placeholder="Masukkan email admin"
                     required
                     autofocus
@@ -183,7 +185,7 @@
 
             <div style="margin-top: 9px; text-align: right;">
                 <a
-                    href="{{ route('admin.password.request') }}"
+                    href="<?php echo e(route('admin.password.request')); ?>"
                     style="
                         color: #0f766e;
                         font-size: 14px;
@@ -210,4 +212,4 @@
         </form>
     </div>
 </body>
-</html>
+</html><?php /**PATH D:\Project\Laravel\harapan-bangsa\resources\views/admin/auth/login.blade.php ENDPATH**/ ?>

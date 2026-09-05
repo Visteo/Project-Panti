@@ -16,6 +16,7 @@ use App\Http\Controllers\NewsController as PublicNewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,19 @@ Route::get(
     [PageController::class, 'contact']
 )->name('contact');
 
+/*
+|--------------------------------------------------------------------------
+| Route Reset Password
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    '/admin/reset-password/{token}',
+    [ForgotPasswordController::class, 'edit']
+)
+    ->middleware('guest')
+    ->name('password.reset');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -125,7 +139,25 @@ Route::prefix('admin')
             )
                 ->middleware('throttle:admin-login')
                 ->name('login.process');
+
+            Route::get(
+                '/lupa-password',
+                [ForgotPasswordController::class, 'create']
+            )->name('password.request');
+
+            Route::post(
+                '/lupa-password',
+                [ForgotPasswordController::class, 'store']
+            )
+                ->middleware('throttle:3,1')
+                ->name('password.email');
+
+            Route::post(
+                '/reset-password',
+                [ForgotPasswordController::class, 'update']
+            )->name('password.update');
         });
+
 
         /*
         |--------------------------------------------------------------------------
