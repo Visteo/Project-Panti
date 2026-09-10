@@ -2074,6 +2074,51 @@
                     grid-template-columns: 1fr;
                 }
             }
+
+            .home-campaign-donate {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 9px;
+                width: 100%;
+                min-height: 50px;
+                padding: 13px 20px;
+                border: none;
+                border-radius: 13px;
+                background: #12355b;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 800;
+                line-height: 1.2;
+                text-align: center;
+                text-decoration: none;
+                box-shadow: 0 10px 24px rgba(18, 53, 91, 0.18);
+                transition:
+                    transform 0.25s,
+                    background-color 0.25s,
+                    box-shadow 0.25s;
+            }
+
+            .home-campaign-donate:hover {
+                transform: translateY(-2px);
+                background: #ef6a5b;
+                color: #ffffff;
+                box-shadow: 0 14px 28px rgba(239, 106, 91, 0.24);
+            }
+
+            .home-campaign-donate:focus {
+                color: #ffffff;
+                outline: 3px solid rgba(245, 158, 11, 0.4);
+                outline-offset: 3px;
+            }
+
+            .home-campaign-donate span {
+                transition: transform 0.25s;
+            }
+
+            .home-campaign-donate:hover span {
+                transform: translateX(4px);
+            }
     </style>
 @endpush
 
@@ -2502,10 +2547,10 @@
                                             'campaigns.show',
                                             $campaign->slug
                                         ) }}"
-                                        class="btn btn-primary"
-                                        style="width: 100%;"
+                                        class="home-campaign-donate"
                                     >
                                         Donasi Sekarang
+                                        <span aria-hidden="true">→</span>
                                     </a>
                                 </div>
                             </div>
