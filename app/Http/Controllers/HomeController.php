@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Donation;
 use App\Models\News;
+use App\Models\Setting;
+use App\Models\Event;
+use App\Models\Founder;
 
 class HomeController extends Controller
 {
@@ -47,12 +50,28 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
+        $setting = Setting::first();
+
+        $latestEvents = Event::published()
+        ->orderByDesc('is_featured')
+        ->orderByDesc('event_date')
+        ->limit(3)
+        ->get();
+
+        $founders = Founder::active()
+        ->ordered()
+        ->limit(6)
+        ->get();
+        
         return view(
             'frontend.home',
             compact(
                 'featuredCampaigns',
                 'statistics',
-                'latestNews'
+                'latestNews',
+                'setting',
+                'latestEvents',
+                'founders'
             )
         );
     }

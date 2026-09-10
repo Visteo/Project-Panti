@@ -528,6 +528,26 @@
             </a>
 
             <a
+                href="<?php echo e(route('admin.events.index')); ?>"
+                class="menu-link <?php echo e(request()->routeIs('admin.events.*')
+                        ? 'active'
+                        : ''); ?>"
+            >
+                <span class="menu-icon">◆</span>
+                Acara & Kegiatan
+            </a>
+
+            <a
+                href="<?php echo e(route('admin.founders.index')); ?>"
+                class="menu-link <?php echo e(request()->routeIs('admin.founders.*')
+                        ? 'active'
+                        : ''); ?>"
+            >
+                <span class="menu-icon">●</span>
+                Pendiri Yayasan
+            </a>
+
+            <a
                 href="<?php echo e(route('admin.donations.index')); ?>"
                 class="menu-link <?php echo e(request()->routeIs('admin.donations.*')
                         ? 'active'

@@ -58,11 +58,30 @@ class SettingController extends Controller
                 'string',
             ],
 
+            'vision' => [
+                'nullable',
+                'string',
+                'max:3000',
+            ],
+
+            'mission' => [
+                'nullable',
+                'string',
+                'max:5000',
+            ],
+
             'logo' => [
                 'nullable',
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:2048',
+            ],
+
+            'about_image' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:5120',
             ],
 
             'address' => [
@@ -148,6 +167,24 @@ class SettingController extends Controller
 
             'instagram.url' =>
                 'Alamat Instagram harus berupa URL lengkap.',
+
+            'hero_image.image' =>
+                'Gambar hero harus berupa gambar.',
+
+            'hero_image.mimes' =>
+                'Gambar hero harus berformat JPG, PNG, atau WEBP.',
+
+            'hero_image.max' =>
+                'Ukuran gambar hero maksimal 5 MB.',
+
+            'about_image.image' =>
+                'Foto tentang yayasan harus berupa gambar.',
+
+            'about_image.mimes' =>
+                'Foto tentang yayasan harus berformat JPG, PNG, atau WEBP.',
+
+            'about_image.max' =>
+                'Ukuran foto tentang yayasan maksimal 5 MB.',
         ]);
 
         if ($request->hasFile('logo')) {
@@ -159,6 +196,32 @@ class SettingController extends Controller
             $validated['logo'] = $request
                 ->file('logo')
                 ->store('settings', 'public');
+        }
+
+        if ($request->hasFile('hero_image')) {
+            $newHeroImage = $request
+                ->file('hero_image')
+                ->store('settings/hero', 'public');
+
+            if ($setting->hero_image) {
+                Storage::disk('public')
+                    ->delete($setting->hero_image);
+            }
+
+            $validated['hero_image'] = $newHeroImage;
+        }
+
+        if ($request->hasFile('about_image')) {
+            $newAboutImage = $request
+                ->file('about_image')
+                ->store('settings/about', 'public');
+
+            if ($setting->about_image) {
+                Storage::disk('public')
+                    ->delete($setting->about_image);
+            }
+
+            $validated['about_image'] = $newAboutImage;
         }
 
         $setting->update($validated);

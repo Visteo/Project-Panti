@@ -14,6 +14,8 @@ class Setting extends Model
         'tagline',
         'short_description',
         'about',
+        'vision',
+        'mission', 
         'logo',
         'address',
         'email',
@@ -26,6 +28,10 @@ class Setting extends Model
         'bri_account_name',
         'mandiri_account_number',
         'mandiri_account_name',
+        'logo',
+        'hero_image',
+        'about_image',
+        'address',
     ];
 
     public function getWhatsappUrlAttribute(): ?string

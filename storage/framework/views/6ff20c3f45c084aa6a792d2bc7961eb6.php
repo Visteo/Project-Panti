@@ -22,13 +22,14 @@
 
     <style>
         :root {
-            --primary: #0f766e;
-            --primary-dark: #115e59;
-            --primary-light: #ccfbf1;
+            --primary: #12355b;
+            --primary-dark: #0c2947;
+            --primary-light: #eaf4ff;
             --accent: #f59e0b;
+            --coral: #ef6a5b;
             --background: #f8fafc;
             --white: #ffffff;
-            --text: #1f2937;
+            --text: #172033;
             --muted: #6b7280;
             --border: #e5e7eb;
         }
@@ -75,12 +76,14 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(18, 53, 91, 0.08);
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 8px 30px rgba(18, 53, 91, 0.05);
+            backdrop-filter: blur(15px);
         }
 
         .navbar-content {
-            min-height: 74px;
+            min-height: 82px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -90,43 +93,62 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 11px;
+            gap: 12px;
             color: var(--primary);
-            font-size: 21px;
-            font-weight: 800;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.4px;
         }
 
         .brand-icon {
-            width: 43px;
-            height: 43px;
             display: grid;
+            width: 45px;
+            height: 45px;
             place-items: center;
-            border-radius: 13px;
-            background: var(--primary);
+            border-radius: 15px;
+            background: var(--coral);
             color: white;
             font-size: 21px;
+            box-shadow: 0 8px 20px rgba(239, 106, 91, 0.22);
         }
 
         .brand-logo {
-            width: 45px;
-            height: 45px;
+            width: 47px;
+            height: 47px;
             padding: 4px;
-            object-fit: contain;
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            border: 1px solid rgba(18, 53, 91, 0.1);
+            border-radius: 14px;
             background: white;
+            object-fit: contain;
         }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 27px;
+            gap: 23px;
         }
 
         .nav-link {
+            position: relative;
+            padding: 29px 0 27px;
             color: #4b5563;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+
+        .nav-link::after {
+            position: absolute;
+            right: 0;
+            bottom: 19px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            margin: auto;
+            border-radius: 5px;
+            background: var(--coral);
+            content: "";
+            transition: width 0.2s;
         }
 
         .nav-link:hover,
@@ -134,45 +156,35 @@
             color: var(--primary);
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 11px 17px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 700;
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 22px;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-light {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-outline {
-            border: 1px solid var(--border);
-            background: white;
+        .nav-donate {
+            min-height: 47px;
+            padding: 12px 19px;
+            border-radius: 13px;
+            background: var(--accent);
             color: var(--text);
+            box-shadow: 0 9px 22px rgba(245, 158, 11, 0.23);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .nav-donate:hover {
+            transform: translateY(-2px);
+            background: #fbbf24;
         }
 
         .mobile-button {
             display: none;
-            width: 42px;
-            height: 42px;
-            border: none;
-            border-radius: 9px;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 13px;
             background: var(--primary-light);
             color: var(--primary);
+            font-size: 20px;
             cursor: pointer;
         }
 
@@ -295,37 +307,96 @@
         }
 
         .footer {
-            padding: 55px 0 25px;
-            background: #0f3d3a;
+            position: relative;
+            overflow: hidden;
+            padding: 75px 0 28px;
+            background: #0c2947;
             color: white;
+        }
+
+        .footer::before {
+            position: absolute;
+            top: -170px;
+            right: -130px;
+            width: 400px;
+            height: 400px;
+            border: 75px solid rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .footer::after {
+            position: absolute;
+            bottom: -170px;
+            left: -120px;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            background: rgba(239, 106, 91, 0.07);
+            content: "";
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 2;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 45px;
-        }
-
-        .footer p,
-        .footer a {
-            color: rgba(255, 255, 255, 0.72);
+            grid-template-columns: 1.6fr 0.8fr 1fr;
+            gap: 65px;
         }
 
         .footer h3 {
-            margin-bottom: 14px;
+            position: relative;
+            margin-bottom: 21px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .footer h3::after {
+            display: block;
+            width: 35px;
+            height: 3px;
+            margin-top: 9px;
+            border-radius: 5px;
+            background: var(--accent);
+            content: "";
+        }
+
+        .footer p,
+        .footer a,
+        .footer span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer p {
+            max-width: 440px;
+            line-height: 1.8;
         }
 
         .footer-links {
             display: flex;
+            align-items: flex-start;
             flex-direction: column;
-            gap: 9px;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            position: relative;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .footer-links a:hover {
+            transform: translateX(4px);
+            color: #fbbf24;
         }
 
         .copyright {
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 55px;
+            padding-top: 23px;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.52);
             text-align: center;
             font-size: 13px;
         }
@@ -418,6 +489,9 @@
                 type="button"
                 class="mobile-button"
                 id="mobileButton"
+                aria-label="Buka menu navigasi"
+                aria-controls="navMenu"
+                aria-expanded="false"
             >
                 ☰
             </button>
@@ -450,6 +524,15 @@
                     Berita
                 </a>
 
+                <a
+                    href="<?php echo e(route('events.index')); ?>"
+                    class="nav-link <?php echo e(request()->routeIs('events.*')
+                            ? 'active'
+                            : ''); ?>"
+                >
+                    Acara
+                </a>
+
                 <a href="<?php echo e(route('about')); ?>"
                     class="nav-link <?php echo e(request()->routeIs('about')
                             ? 'active' : ''); ?>">
@@ -463,7 +546,7 @@
 
                 <a
                     href="<?php echo e(route('campaigns.index')); ?>"
-                    class="btn btn-primary"
+                    class="btn nav-donate"
                 >
                     Donasi Sekarang
                 </a>
@@ -502,6 +585,10 @@
 
                         <a href="<?php echo e(route('campaigns.index')); ?>">
                             Campaign
+                        </a>
+
+                        <a href="<?php echo e(route('events.index')); ?>">
+                            Acara & Kegiatan
                         </a>
 
                         <a href="<?php echo e(route('news.index')); ?>">
@@ -578,12 +665,35 @@
     </footer>
 
     <script>
-        const mobileButton = document.getElementById('mobileButton');
-        const navMenu = document.getElementById('navMenu');
+        const mobileButton =
+            document.getElementById('mobileButton');
 
-        mobileButton.addEventListener('click', function () {
-            navMenu.classList.toggle('open');
-        });
+        const navMenu =
+            document.getElementById('navMenu');
+
+        if (mobileButton && navMenu) {
+            mobileButton.addEventListener('click', function () {
+                const isOpen = navMenu.classList.toggle('open');
+
+                mobileButton.setAttribute(
+                    'aria-expanded',
+                    isOpen ? 'true' : 'false'
+                );
+
+                mobileButton.textContent = isOpen ? '×' : '☰';
+            });
+
+            navMenu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    navMenu.classList.remove('open');
+                    mobileButton.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+                    mobileButton.textContent = '☰';
+                });
+            });
+        }
     </script>
 
     <?php echo $__env->yieldPushContent('scripts'); ?>
