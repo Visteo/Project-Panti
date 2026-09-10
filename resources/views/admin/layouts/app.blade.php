@@ -532,6 +532,30 @@
             </a>
 
             <a
+                href="{{ route('admin.events.index') }}"
+                class="menu-link {{
+                    request()->routeIs('admin.events.*')
+                        ? 'active'
+                        : ''
+                }}"
+            >
+                <span class="menu-icon">◆</span>
+                Acara & Kegiatan
+            </a>
+
+            <a
+                href="{{ route('admin.founders.index') }}"
+                class="menu-link {{
+                    request()->routeIs('admin.founders.*')
+                        ? 'active'
+                        : ''
+                }}"
+            >
+                <span class="menu-icon">●</span>
+                Pendiri Yayasan
+            </a>
+
+            <a
                 href="{{ route('admin.donations.index') }}"
                 class="menu-link {{
                     request()->routeIs('admin.donations.*')

@@ -112,8 +112,95 @@
                     name="about"
                     class="form-control"
                     style="min-height: 250px;"
-                    placeholder="Ceritakan sejarah, visi, dan kegiatan organisasi"
+                    placeholder="Ceritakan sejarah dan profil singkat organisasi"
                 >{{ old('about', $setting->about) }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="about_image" class="form-label">
+                    Foto Tentang Yayasan
+                </label>
+
+                @if ($setting->about_image)
+                    <div style="margin-bottom: 14px;">
+                        <img
+                            src="{{ asset(
+                                'storage/' . $setting->about_image
+                            ) }}"
+                            alt="Tentang {{ $setting->organization_name }}"
+                            style="
+                                width: 100%;
+                                max-width: 600px;
+                                max-height: 350px;
+                                border-radius: 14px;
+                                object-fit: cover;
+                            "
+                        >
+                    </div>
+                @endif
+
+                <input
+                    type="file"
+                    id="about_image"
+                    name="about_image"
+                    class="form-control"
+                    accept=".jpg,.jpeg,.png,.webp"
+                >
+
+                <small
+                    style="
+                        display: block;
+                        margin-top: 7px;
+                        color: #6b7280;
+                    "
+                >
+                    Gunakan foto kegiatan yayasan.
+                    Format JPG, PNG, atau WEBP. Maksimal 5 MB.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="vision" class="form-label">
+                    Visi Yayasan
+                </label>
+                <textarea
+                    id="vision"
+                    name="vision"
+                    class="form-control"
+                    style="min-height: 140px;"
+                    placeholder="Tuliskan visi utama yayasan"
+                >{{ old('vision', $setting->vision) }}</textarea>
+
+                <small
+                    style="
+                        display: block;
+                        margin-top: 7px;
+                        color: #6b7280;">
+                    Tuliskan tujuan atau cita-cita utama yayasan.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="mission" class="form-label">
+                    Misi Yayasan
+                </label>
+                <textarea
+                    id="mission"
+                    name="mission"
+                    class="form-control"
+                    style="min-height: 190px;"
+                    placeholder="Memberikan pendidikan yang layak&#10;Memenuhi kebutuhan kesehatan anak&#10;Mengembangkan potensi dan keterampilan anak"
+                >{{ old('mission', $setting->mission) }}</textarea>
+
+                <small
+                    style="
+                        display: block;
+                        margin-top: 7px;
+                        color: #6b7280;
+                    "
+                >
+                    Tulis satu poin misi pada setiap baris.
+                </small>
             </div>
 
             <div class="form-group">

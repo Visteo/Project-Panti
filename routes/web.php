@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ForgotPasswordController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\EventController as PublicEventController;
+use App\Http\Controllers\Admin\FounderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +73,16 @@ Route::get(
     '/berita/{news:slug}',
     [PublicNewsController::class, 'show']
 )->name('news.show');
+
+Route::get(
+    '/acara',
+    [PublicEventController::class, 'index']
+)->name('events.index');
+
+Route::get(
+    '/acara/{event:slug}',
+    [PublicEventController::class, 'show']
+)->name('events.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -180,6 +193,16 @@ Route::prefix('admin')
                 Route::resource(
                     'campaigns',
                     CampaignController::class
+                )->except('show');
+
+                Route::resource(
+                    'events',
+                    EventController::class
+                )->except('show');
+
+                Route::resource(
+                    'founders',
+                    FounderController::class
                 )->except('show');
 
                 Route::resource(
